@@ -16,7 +16,7 @@ if (true) {
 console.log(a); // 10
 ```
 
-In this example, `a` can still be accessed outside the block because `var` ignores block scope. However, `b` and `c` cannot be accessed outside the block.
+**In this example,** `a` can still be accessed outside the block because `var` ignores block scope. However, `b` and `c` cannot be accessed outside the block.
 
 Another important difference is hoisting. `var` is hoisted and initialized with `undefined`, while `let` and `const` stay in the Temporal Dead Zone until they are declared.
 
@@ -43,7 +43,7 @@ The V8 Engine is Google's JavaScript engine that is used in Chrome and Node.js. 
 
 One reason V8 is fast is because it uses Just-In-Time (JIT) compilation. Instead of interpreting code line by line every time, it compiles code into optimized machine code while the program is running.
 
-JavaScript is called single-threaded because it has only one main execution thread. This means it executes one task at a time.
+JavaScript is called **single-threaded** because it has only one main execution thread. This means it executes one task at a time.
 
 ```js
 console.log("A");
@@ -57,8 +57,6 @@ console.log("C");
 A
 B
 C
-```
-
 JavaScript executes statements in order using a call stack.
 
 A common question is how JavaScript handles timers and API calls if it is single-threaded. The answer is that browsers provide Web APIs, and JavaScript uses the Event Loop to manage asynchronous operations.
@@ -88,7 +86,7 @@ So even though JavaScript is single-threaded, it can still handle asynchronous t
 
 ### JavaScript's 8 Data Types
 
-JavaScript has **8 data types**: **7 primitive types** and **1 non-primitive type (Object)**.
+JavaScript has **eight data types**: **seven primitive types** and **1 non-primitive type (Object)**.
 
 #### Primitive Types
 1. `String` – Represents text data.
