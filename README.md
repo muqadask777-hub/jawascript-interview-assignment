@@ -51,7 +51,7 @@ console.log("B");
 console.log("C");
 ```
 
-Output:
+**Output:**
 
 ```js
 A
@@ -73,7 +73,7 @@ setTimeout(() => {
 console.log("End");
 ```
 
-Output:
+**Output:**
 
 ```js
 Start
