@@ -25,7 +25,7 @@ console.log(x);
 var x = 5;
 ```
 
-Output:
+**Output:**
 
 ```js
 undefined
