@@ -84,38 +84,92 @@ Timer Done
 The timer runs outside the call stack, and once it finishes, its callback is placed in the queue. The Event Loop moves it back to the stack when JavaScript is ready to execute it.
 
 So even though JavaScript is single-threaded, it can still handle asynchronous tasks very efficiently.
+## A3 - JavaScript Data Types & Type Coercion
 
-## A3. Explain the 8 JavaScript data types. What is type coercion — implicit vs explicit?
+### JavaScript's 8 Data Types
 
-JavaScript has eight data types. Seven of them are primitive types, and one is a non-primitive type.
+JavaScript has **8 data types**: **7 primitive types** and **1 non-primitive type (Object)**.
 
-The primitive data types are Number, String, Boolean, Undefined, Null, Symbol, and BigInt.
+#### Primitive Types
+1. `String` – Represents text data.
+2. `Number` – Represents integers and decimal numbers.
+3. `BigInt` – Represents very large integers.
+4. `Boolean` – Represents `true` or `false`.
+5. `Undefined` – A variable declared but not assigned a value.
+6. `Symbol` – Represents unique identifiers.
+7. `Null` – Represents the intentional absence of a value.
 
-The eighth data type is Object.
-
-Type coercion means converting one data type into another.
-
-Implicit coercion happens automatically.
-
-```js
-console.log("5" + 2);
-```
-
-Output:
-
-```js
-"52"
-```
-
-Explicit coercion happens when the developer performs the conversion manually.
+#### Non-Primitive Type
+8. `Object` – Used to store collections of data and more complex entities such as arrays, functions, and objects.
 
 ```js
-Number("123");
-String(123);
-Boolean(1);
+let name = "Ali";       // String
+let age = 20;           // Number
+let big = 123n;         // BigInt
+let isStudent = true;   // Boolean
+let x;                  // Undefined
+let id = Symbol("id");  // Symbol
+let value = null;       // Null
+let user = {};          // Object
 ```
 
-I usually prefer explicit conversions because they make the code easier to understand and reduce unexpected behavior.
+### The Famous `typeof null` Bug
+
+```js
+console.log(typeof null); // "object"
+```
+
+Although `null` is a primitive data type, `typeof null` returns `"object"`. This is a historical bug from JavaScript's first version in 1995. It was never fixed because changing it would break older applications and affect backward compatibility.
+
+### Type Coercion
+
+Type coercion is the process of converting a value from one data type to another.
+
+### Implicit Coercion (Automatic Conversion)
+
+JavaScript automatically converts values when needed.
+
+```js
+console.log("5" + 2);  // "52"
+console.log("10" - 3); // 7
+```
+
+In the first example, the number is converted to a string. In the second example, the string is converted to a number.
+
+### Explicit Coercion (Manual Conversion)
+
+The programmer intentionally converts values using built-in functions.
+
+```js
+console.log(Number("123")); // 123
+console.log(String(456));   // "456"
+console.log(Boolean(1));    // true
+```
+
+### `==` vs `===`
+
+#### Loose Equality (`==`)
+
+Performs type coercion before comparison.
+
+```js
+console.log("5" == 5); // true
+```
+
+#### Strict Equality (`===`)
+
+Compares both value and data type without coercion.
+
+```js
+console.log("5" === 5); // false
+```
+
+### Why is `===` Safer?
+
+- `==` can produce unexpected results because it automatically converts data types.
+- `===` checks both type and value, making comparisons more predictable and reliable.
+
+Therefore, `===` is generally recommended in modern JavaScript.
 
 ## A4. What is the difference between primitive and non-primitive (reference) data types in JavaScript? How are they stored in memory?
 
@@ -169,33 +223,36 @@ function updateUser(user) {
 
 Many people call this pass by reference, but technically JavaScript is still pass by value because it passes a copy of the reference.
 
-## A6. What is a function in JavaScript? Explain function declaration with syntax, hoisting behaviour, return values, and parameters.
+## A6 - Functions in JavaScript
 
-A function is a reusable block of code that performs a specific task.
+### What is a Function?
 
-```js
-function greet() {
-  console.log("Hello World");
-}
-```
+A function is a reusable block of code that performs a specific task. It helps reduce code duplication, improves readability, and makes programs easier to maintain.
 
-Functions can accept parameters.
+### Function Declaration Syntax
 
 ```js
 function greet(name) {
-  console.log("Hello " + name);
+  return `Hello, ${name}`;
 }
 ```
 
-Functions can also return values.
+### Parameters and Arguments
+
+- **Parameter:** A variable defined in the function declaration.
+- **Argument:** The actual value passed when calling the function.
 
 ```js
-function multiply(a, b) {
-  return a * b;
+function greet(name) { // parameter
+  return `Hello ${name}`;
 }
+
+greet("Ali"); // argument
 ```
 
-Function declarations are hoisted, which means they can be called before their declaration in the code.
+### Hoisting
+
+Function declarations are hoisted in JavaScript, meaning they can be called before they are defined in the code.
 
 ```js
 sayHello();
@@ -205,4 +262,51 @@ function sayHello() {
 }
 ```
 
-I use functions regularly because they make code more organized, reusable, and easier to maintain.
+### Return Values
+
+A function returns a value using the `return` keyword.
+
+```js
+function add(a, b) {
+  return a + b;
+}
+```
+
+If no `return` statement is provided, JavaScript automatically returns `undefined`.
+
+```js
+function test() {}
+
+console.log(test()); // undefined
+```
+
+### Real-World Example: Age Validation
+
+```js
+function isEligible(age) {
+  return age >= 18;
+}
+
+console.log(isEligible(20)); // true
+console.log(isEligible(15)); // false
+```
+
+### Functions are Objects
+
+Functions are special objects in JavaScript.
+
+```js
+function demo() {}
+
+console.log(typeof demo); // "function"
+console.log(demo instanceof Object); // true
+```
+
+They also have built-in properties such as `.name` and `.length`.
+
+```js
+function greet(name) {}
+
+console.log(greet.name);   // "greet"
+console.log(greet.length); // 1
+```
